@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
+#include "../cryptics.h"
 
 /** Primality test using
 * n ∈ Z | P(n) = 6 + 6(n-1) ± 1 where n != 0 and P is a prime >= 5
 *
 **/
-bool cryptics_primes_primality_test(unsigned long long number) {
-  if (number > 0xFFFFFFFFFFFFFFFF) {
+bool cryptics_primes_primality_test(uint64_t number) {
+  if (number > sizeof(uint64_t)) {
     fprintf(stderr, "Number too large, max 2⁶⁴ - 1");
   }
 
@@ -31,8 +33,8 @@ bool cryptics_primes_primality_test(unsigned long long number) {
 * {a, b} ∈ Z | C(a, b) = C(b, a mod b) until b = 0 and a = 1
 **/
 
-bool cryptics_primes_coprimality_test(unsigned long long number_one, unsigned long long number_two) {
-  if (number_one > 0xFFFFFFFFFFFFFFFF || number_two > 0xFFFFFFFFFFFFFFFF) {
+bool cryptics_primes_coprimality_test(uint64_t number_one, uint64_t number_two) {
+  if (number_one > sizeof(uint64_t) || number_two > sizeof(uint64_t)) {
     fprintf(stderr, "Number too large, max 2⁶⁴ - 1");
   }
 
@@ -43,20 +45,9 @@ bool cryptics_primes_coprimality_test(unsigned long long number_one, unsigned lo
       return 0;
   }
 
-  unsigned long long r, a, b;
-  r = 1;
-  a = number_one;
-  b = number_two;
+  int gcd = cryptics_general_gcd(number_one, number_two);
 
-  while(r != 0) {
-    r = a % b;
-    a = b;
-    b = r;
-  }
-
-  printf("%d\n", a);
-
-  if (a == 1)
+  if (gcd == 1)
     return true;
 
   return false;
