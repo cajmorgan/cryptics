@@ -9,7 +9,7 @@
 *
 **/
 bool cryptics_primes_primality_test(uint64_t number) {
-  if (number > sizeof(uint64_t)) {
+  if (number > UINT64_MAX) {
     fprintf(stderr, "Number too large, max 2⁶⁴ - 1");
   }
 
@@ -34,7 +34,7 @@ bool cryptics_primes_primality_test(uint64_t number) {
 **/
 
 bool cryptics_primes_coprimality_test(uint64_t number_one, uint64_t number_two) {
-  if (number_one > sizeof(uint64_t) || number_two > sizeof(uint64_t)) {
+  if (number_one > UINT64_MAX || number_two > UINT64_MAX) {
     fprintf(stderr, "Number too large, max 2⁶⁴ - 1");
   }
 

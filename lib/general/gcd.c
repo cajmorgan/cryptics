@@ -24,14 +24,14 @@ uint64_t cryptics_general_gcd(uint64_t a, uint64_t b) {
 * index 2 = coeffecients of b
 * xa + yb = gcd(a, b)
 **/
-uint64_t *cryptics_general_gcd_extended(uint64_t a, uint64_t b) {
-  uint64_t s[2] = {1, 0};
-  uint64_t t[2] = {0, 1};
+int64_t *cryptics_general_gcd_extended(uint64_t a, uint64_t b) {
+  int64_t s[2] = {1, 0};
+  int64_t t[2] = {0, 1};
   uint64_t q, r;
   q = 0;
   r = 1;
 
-  uint64_t s_temp, t_temp;
+  int64_t s_temp, t_temp;
   s_temp = t_temp = 0;
   while(r != 0) {
     q = a / b;
@@ -48,8 +48,8 @@ uint64_t *cryptics_general_gcd_extended(uint64_t a, uint64_t b) {
     t[1] = t_temp;
   }
 
-  uint64_t *result = (uint64_t*)malloc(sizeof(uint64_t) * 3);
-  result[0] = a;
+  int64_t *result = (int64_t*)malloc(sizeof(int64_t) * 3);
+  result[0] = (int64_t)a;
   result[1] = s[0];
   result[2] = t[0];
 
