@@ -6,6 +6,7 @@
   #include "general/general.h"
   #include "bases/bases.h"
   #include "primes/primes.h"
+  #include "utilities/utilities.h"
   #include "types.h"
 
   /** Global defines **/

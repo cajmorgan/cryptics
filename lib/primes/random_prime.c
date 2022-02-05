@@ -23,7 +23,7 @@ uint64_t cryptics_primes_random_prime(uint64_t high, uint64_t low, uint64_t seed
     counter += 1;
   }
 
-  uint64_t random_divisor = generate_random_number(high, low);
+  uint64_t random_divisor = generate_random_number();
   double random_float = random_divisor / seed;
 
   printf("%f", random_float);
