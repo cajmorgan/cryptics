@@ -21,7 +21,7 @@ bool cryptics_primes_primality_test(uint64_t number) {
   };
 
   for (int i = 6; i*i <= number; i += 6) {
-    if (number % i-1 == 0 || number % i+1 == 0) {
+    if (number % (i-1) == 0 || number % (i+1) == 0) {
       return false;
     }
   };
