@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdlib.h>
 #include <stdint.h>
 
 /** Modulus Operator
@@ -19,15 +20,18 @@
 * r = 1
 **/
 
+
 uint64_t cryptics_general_mod(int64_t a, int64_t m) {
   if (m == 0)
     return -1;
 
   int64_t q = a/m;
-  if (q <= 0)
+  if (q == 0 && a < 0 && a < m)
+    q = -1;
+  if (q < 0)
     q -= 1;
 
-  int r = a - (q * m);
+  int64_t r = a - (q * m);
 
-  return r;
+  return abs(r);
 }

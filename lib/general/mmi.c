@@ -1,7 +1,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "general.h"
+#include <math.h>
+#include "../cryptics.h"
 
 
 /** Modular Multiplicative Inverse
@@ -28,11 +29,10 @@
 **/
 uint64_t cryptics_general_mmi(uint64_t a, uint64_t m) {
   int64_t *gcd_ext = (int64_t *)malloc(sizeof(int64_t) * 3);
+  cryptics_general_gcd_extended(a, m, gcd_ext);
   if(gcd_ext[0] != 1) {
     return -1;
   }
-
-  cryptics_general_gcd_extended(a, m, gcd_ext);
 
   uint64_t res = cryptics_general_mod(gcd_ext[1], m);
   free(gcd_ext);

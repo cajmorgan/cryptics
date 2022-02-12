@@ -1,14 +1,28 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <math.h>
+#include "rsa.h"
 #include "../cryptics.h"
 
-uint64_t cryptics_rsa_generate_keys() {
-  uint64_t rand_p, rand_q, prime_product;
-  rand_p = cryptics_primes_random_prime(100000000, 10000000);
-  rand_q = cryptics_primes_random_prime(10000000, 1000000);
-  prime_product = rand_p * rand_q;
+#define E 65537
 
-  printf("%ld\n", prime_product);
+uint64_t cryptics_rsa_generate_keys() {
+  uint64_t rand_p, rand_q, prime_product, totient_product, private_exp;
+  rand_p = cryptics_primes_random_prime(196611, 10000);
+  rand_q = cryptics_primes_random_prime(21845, 20000);
+
+  prime_product = rand_p * rand_q;
+  totient_product = cryptics_general_lcm(rand_p-1, rand_q-1);
+  private_exp = cryptics_general_mmi(E, totient_product);
+
+  if (private_exp < 0) {
+    return -1;
+  }
+  printf("P %ld\n", rand_p);
+  printf("Q %ld\n", rand_q);
+  printf("Prime Product: %ld\n", prime_product);
+  printf("LCM: %ld\n", totient_product);
+  printf("PRIVATE %ld\n", private_exp);
   return rand_p;
 }
