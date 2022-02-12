@@ -7,10 +7,10 @@
 
 #define E 65537
 
-uint64_t cryptics_rsa_generate_keys() {
+uint64_t cryptics_rsa_32_generate_keys() {
   uint64_t rand_p, rand_q, prime_product, totient_product, private_exp;
-  rand_p = cryptics_primes_random_prime(196611, 10000);
-  rand_q = cryptics_primes_random_prime(21845, 20000);
+  rand_p = cryptics_primes_random_prime(196611, 100000);
+  rand_q = cryptics_primes_random_prime(21845, 10000);
 
   prime_product = rand_p * rand_q;
   totient_product = cryptics_general_lcm(rand_p-1, rand_q-1);
