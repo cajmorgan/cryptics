@@ -1,3 +1,3 @@
 # Cryptics
 
-Implementing cryptographic algorithm for fun
+A simple RSA implementation in C
